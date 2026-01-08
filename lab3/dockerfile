@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /app
+
+COPY model.py service.py best_model.ckpt ./
+
+RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.1.0
+
+RUN pip install --no-cache-dir lightning 'numpy<2.0'
+
+RUN pip install --no-cache-dir bentoml
+
+EXPOSE 3000
+
+CMD ["bentoml", "serve", "service:prediction", "--host", "0.0.0.0", "--port", "3000"]
