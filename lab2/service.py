@@ -9,10 +9,7 @@ def preprocess_input(values):
         tensor = tensor.unsqueeze(0)
     return tensor
 
-@bentoml.service(
-    image=bentoml.images.Image(python_version="3.11")
-    .python_packages("torch", "numpy", "lightning")
-)
+@bentoml.service
 class prediction:
     def __init__(self) -> None:
         print("Loading model...")

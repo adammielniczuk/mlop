@@ -8,7 +8,7 @@ args = parser.parse_args()
 d = args.numbers
 print(f'Which number is bigger, {d[0]} or {d[1]}?')
 with bentoml.SyncHTTPClient(
-    "https://prediction-e705-e944bcd0.mt-guc1.bentoml.ai",
+    "http://localhost:3000",
 ) as client:
     result = client.predict(
         data=d,
